@@ -1286,6 +1286,52 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**__�
 
 
 
+client.on('message', message => {
+  if(message.content === prefix + "$user"){
+    var embed = new Discord.RichEmbed()
+    .setTitle(message.author.tag, message.author.avatarURL)
+    .addField(`User`, message.author.username)
+    .addField(`Discrim`,`#`+ message.author.discriminator)
+    .addField(`Name Color Role`, message.member.colorRole)
+    .addField(`Game`,message.author.presence.game ||"Idel.")
+    .addField(`Status`,message.author.presence.status)
+    message.channel.send(embed);
+  }
+});
+
+
+
+
+
+
+client.on("message", message => {
+  if (message.content.startsWith(prefix + 'send')) {
+    if(!message.author.id === "569502505289908245") return;
+    var user = message.mentions.members.first();
+    var args = message.content.split(" ").slice(1).join(" ");
+user.send(args);
+  }});
+
+
+
+
+
+
+
+
+
+client.on('ready', () => {// افنت التشغيل 
+  setInterval(function(){
+      client.guilds.forEach(g => { // فور ايرج تدخل للسيرفرات كلها
+                  var role = g.roles.find('name', 'Rainbow');//Rainbow  اسم الرتبة عشان يسوي ريمبو غيرها اذا تبي
+                  if (role) {
+                      role.edit({color : "RANDOM"});
+                  };
+      });
+  }, 60000);// وقت الريمبو لا تغيرة لانه الوقت المسموح للتغيير
+})
+
+
 
 
 
