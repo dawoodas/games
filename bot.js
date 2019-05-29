@@ -1338,4 +1338,86 @@ client.on('ready', () => {// افنت التشغيل
 
 
 
+
+
+
+client.on('message',async message =>{ 
+    if(message.content.startsWith(prefix + "channels")) {
+        let f4res = 1;
+        let embed = new Discord.RichEmbed()
+        .setAuthor(message.author.username, message.author.avatarURL)
+        .setTitle(message.guild.name)
+        .setThumbnail(message.guild.iconURL)
+        .setDescription(message.guild.channels.map(c => `\`${f4res++}\` - **${c.name}**`))
+        .setFooter(`Requested By : ${message.author.tag} `);
+        message.channel.send(embed).then(msg => {
+            msg.delete(25000);
+            message.delete(25000);
+        });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+var id = ['413660639668731914','241451199499468800'] //تذكر إذا كنت تبي تضيف شخص معاك حط فاصله وبعدين العلامه '
+var initcmd = '$'
+const developers = id
+const adminprefix = initcmd;
+client.on('message', message => {
+    var argresult = message.content.split(' ').slice(2).join(" ")
+      if (!developers.includes(message.author.id)) return;
+     
+  if (message.content.startsWith(adminprefix + 'ply')) {
+    if (!argresult) return message.channel.send(':no_entry: | يرجى كتابة أي شيء بعد ألأمر')
+    client.user.setGame(argresult);
+      message.channel.send("**:white_check_mark: | The Playing Status Has Been Changed To : ``"
+   + `${argresult}` + "``**")
+  } else
+  if (message.content.startsWith(adminprefix + 'wat')) {
+        if (!argresult) return message.channel.send(':no_entry: | يرجى كتابة أي شيء بعد ألأمر')
+ 
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.send("**:white_check_mark: | The Watching Status Has Been Changed To : ``"
+   + `${argresult}` + "``**")
+  } else
+  if (message.content.startsWith(adminprefix + 'lis')) {
+        if (!argresult) return message.channel.send(':no_entry: | يرجى كتابة أي شيء بعد ألأمر')
+ 
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.send("**:white_check_mark: | The Listening Status Has Been Changed To : ``"
+   + `${argresult}` + "``**")
+  } else
+  if (message.content.startsWith(adminprefix + 'stream')) {
+        if (!argresult) return message.channel.send(':no_entry: | يرجى كتابة أي شيء بعد ألأمر')
+ 
+    client.user.setGame(argresult, "https://www.twitch.tv/fadi_games2");
+      message.channel.send("**:white_check_mark: | The Streaming Status Has Been Changed To : ``"
+   + `${argresult}` + "``**")
+  }
+  if (message.content.startsWith(adminprefix + 'username')) {
+        if (!argresult) return message.channel.send(':no_entry: | يرجى كتابة أي شيء بعد ألأمر')
+ 
+  client.user.setUsername(argresult).then
+      message.channel.send(`Changing The Name To ..**${argresult}** `)
+} else
+if (message.content.startsWith(adminprefix + 'avatar')) {
+      if (!argresult) return message.channel.send(':no_entry: | يرجى كتابة أي شيء بعد ألأمر')
+ 
+  client.user.setAvatar(argresult);
+    message.channel.send(`Changing The Avatar To :**${argresult}** `);
+}
+});
+
+
+
+
+
 client.login(process.env.BOT_TOKEN);
