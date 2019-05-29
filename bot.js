@@ -1420,4 +1420,176 @@ if (message.content.startsWith(adminprefix + 'editavatar')) {
 
 
 
+
+
+
+
+
+
+
+
+client.on("message", message => {
+  var prefix = "$";
+  if(message.content.startsWith(prefix + "embed")) {
+    
+
+var color = message.content.split(" ")[1];
+  var text = message.content.split(" ").slice(2);
+    var tt = text.join(" ")
+  if(!color) return message.reply("يجب كتابة لون الامبد الذي تريده");
+    if(!tt) return message.reply("يجب كتابة كلام لتكراره");
+  let embed = new Discord.RichEmbed()
+  .setColor(color)
+  .setDescription(tt)
+  message.channel.send(embed).catch(Julian =>{console.log('`Error`: ' + Julian);
+message.channel.send("`Error`:" + Julian)
+    })
+  }
+  });
+
+
+
+
+
+
+
+
+client.on('message' , async (message) => {
+var prefix = "$"
+    if(message.content.startsWith(prefix + "tInv")) {
+if(message.author.bot) return;
+if(!message.channel.guild) return message.reply(' Error : \` Guild Command \`');
+  var invites = await message.guild.fetchInvites();
+    invites = invites.array();
+    arraySort(invites, 'uses', { reverse: true });
+    let possibleInvites = ['User Invited |  Uses '];
+    invites.forEach(i => {
+        if (i.uses === 0) { 
+            return;
+        }
+      possibleInvites.push(['\n\ ' +'<@'+ i.inviter.id +'>' + '  :  ' +   i.uses]);
+      if (i.uses === 10) {//يمديك تعدل رقم وصول العدد حق الانفايت الى اأقل أو أكثر
+          message.member.addRole(message.member.guild.roles.find("name",""))//هنآ أسم ألرتبه اللي تجيهه
+.catch(RebeL =>{
+console.log('`Error`: ' + RebeL);
+});
+}
+if (i.uses === 20) {
+message.member.addRole(message.member.guild.roles.find("name",""))
+.catch(RebeL =>{
+console.log('`Error`: ' + RebeL);
+});
+}
+!if (i.uses === 30) {
+message.member.addRole(message.member.guild.roles.find("name",""))
+.catch(RebeL =>{
+console.log('`Error`: ' + RebeL);
+});
+      }//معلومه بسيطه يمديك تكرر العمليهه أكثر من مره
+    })
+    const embed = new Discord.RichEmbed()
+ .setColor('#36393e')
+    .addField("Top Invites." ,`${(possibleInvites)}`)
+
+    message.channel.send(embed)
+    }//codes
+});
+
+
+
+
+
+
+
+
+
+client.on('message', msg => {
+var prefix = "$";
+  if(!msg.guild) return;
+    if (msg.content.startsWith(prefix +'channels')) {
+     let args = msg.content.split(" ").slice(1);
+    if(!msg.channel.guild) return msg.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+let eyadandr3d = new Discord.RichEmbed()
+.setThumbnail(msg.author.avatarURL)
+.setDescription(`                            📝ان كنت تريد انشاء روم صوتي اظغط علي الايموجي🎤                                                                                                                                                                                     الان كنت تريد انشاء مستند اضغط علي الايموجي                                                                                                                                                                                                                                                      
+ ✏ان كنت تريد انشاء شات كتابي اظغط علي الايموجي `)
+.setFooter('لديك دقيقه للاختيار')
+msg.channel.send(eyadandr3d).then(message => {
+   
+   
+ message.react('✏').then(r=>{
+ message.react('🎤').then(r=>{
+           
+ message.react('📝').then(r=>{
+                                   
+                             
+   
+let Category = (reaction, user) => reaction.emoji.name === '📝' && user.id === msg.author.id;
+let Text = (reaction, user) => reaction.emoji.name === '✏' && user.id === msg.author.id;
+ let Voice = (reaction, user) => reaction.emoji.name === '🎤' && user.id === msg.author.id;
+ 
+let cy = message.createReactionCollector(Category, { time: 60000 });
+let tt = message.createReactionCollector(Text, { time: 60000 });
+ let ve  = message.createReactionCollector(Voice, { time: 60000 });
+ 
+ve.on("collect", r => {
+msg.guild.createChannel(args.join(' '), 'voice');
+    msg.channel.send(`☑ تم انشاء روم صوتي بنجاح : \`${args}\``)
+    msg.delete();
+})
+tt.on("collect", r => {
+msg.guild.createChannel(args.join(' '), 'text');
+    msg.channel.send(`☑ تم انشاء شات كتابي بنجاح : \`${args}\``)
+    msg.delete();
+})
+cy.on("collect", r => {
+msg.guild.createChannel(args.join(' '), 'category');
+    msg.channel.send(`☑ تم انشاء المستند بنجاح : \`${args}\``)
+    msg.delete();
+})
+})
+})
+})
+})
+}
+});
+
+
+
+
+
+
+
+
+
+client.on('message', async message => {
+  if(message.content.startsWith(prefix + "voicesetup")) {
+  if(!message.guild.member(message.author).hasPermissions('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
+  if(!message.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS','MANAGE_ROLES_OR_PERMISSIONS'])) return message.reply('❌ **ليس معي الصلاحيات الكافية**');
+  var args = message.content.split(' ').slice(1).join(' ');
+  if(args && !args.includes(0)) return message.channel.send('❎ » فشل اعداد الروم الصوتي .. __يجب عليك كتابة 0 في اسم الروم__');
+  if(!args) args = `VoiceOnline: [ ${message.guild.members.filter(s => s.voiceChannel).size} ]`;
+  message.channel.send('✅ » تم عمل الروم الصوتي بنجاح');
+  message.guild.createChannel(`${args.replace(0, message.guild.members.filter(s => s.voiceChannel).size)}`, 'voice').then(c => {
+    c.overwritePermissions(message.guild.id, {
+      CONNECT: false,
+      SPEAK: false
+    });
+    setInterval(() => {
+      c.setName(`${args.replace(0, message.guild.members.filter(s => s.voiceChannel).size)}`).catch(err => {
+        if(err) return;
+      });
+    },3000);
+  });
+  }
+});
+
+
+
+
+
+
+
+
+
 client.login(process.env.BOT_TOKEN);
