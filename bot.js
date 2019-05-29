@@ -1408,7 +1408,7 @@ client.on('message', message => {
   client.user.setUsername(argresult).then
       message.channel.send(`Changing The Name To ..**${argresult}** `)
 } else
-if (message.content.startsWith(adminprefix + 'avatar')) {
+if (message.content.startsWith(adminprefix + 'editavatar')) {
       if (!argresult) return message.channel.send(':no_entry: | يرجى كتابة أي شيء بعد ألأمر')
  
   client.user.setAvatar(argresult);
